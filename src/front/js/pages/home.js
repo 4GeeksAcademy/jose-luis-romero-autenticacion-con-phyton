@@ -7,10 +7,12 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
+		<div className="text-center">
 			<p>
-				<img src={rigoImageUrl} />
+				<h1 style={{ position: "absolute", top: "70%", left: "50%", transform: "translate(-50%, -50%)", color:"white"}}> REALIZADO POR JOSE LUIS</h1>
+				<img src="https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+					style={{ width: "100vw", height: "100vh", objectFit: "cover" }}
+				/>
 			</p>
 			<div className="alert alert-info">
 				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
