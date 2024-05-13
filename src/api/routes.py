@@ -28,7 +28,7 @@ def handle_hello():
 def register_User():
 
     data = request.get_json()
-    print= (data);
+    print(data);
     name = data["name"]
     email = data["email"]
     password = data["password"]

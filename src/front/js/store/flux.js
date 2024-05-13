@@ -27,7 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		register_User: (name,email, password) =>{
 			console.log("probar")
-			fetch( 'https://redesigned-guacamole-pqx4jp945p4c6wr-3001.app.github.dev/signup',{
+			fetch( 'https://redesigned-guacamole-pqx4jp945p4c6wr-3001.app.github.dev/api/signup',{
 				method:'POST',
 				headers:{
 					'Content-Type' : 'application/json'
