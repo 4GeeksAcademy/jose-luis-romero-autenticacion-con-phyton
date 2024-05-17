@@ -1,5 +1,5 @@
 import React,{useEffect, useState, useContext}from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "../../styles/login.css";
 import { Context } from "../store/appContext";
 
@@ -8,18 +8,27 @@ const Login=()=>{
     /* ------------------------------------------- */
 
     /* Estas lineas creamos los useState de los inputs */
-    const[name, setName]= useState("");
+    const[email, setEmail]= useState("");
 	const[password, setPassword]= useState("")
+
+    const navigate = useNavigate();
     /* ------------------------------------------------- */
 
     const handleSubmit = e =>{
 		e.preventDefault();
-        
+        actions.login(email, password );
+        setEmail(" ");
+        setPassword();
     }
+    useEffect(()=>{
+        if(store.isLoggedIn === true){
+            navigate('/private')
+        }
+    },[store.isLoggedIn])
 
     return(
         <div className="container">
-                <form >
+                <form onSubmit={handleSubmit}>
                     <div className="content">
                         <header>LOGIN</header>
                             <p>Please enter your Login and your password</p>
@@ -31,8 +40,8 @@ const Login=()=>{
                                     <input type="text" 
                                     className="inputs form-control"   
                                     placeholder="E-mail" 
-                                    value={name}
-					                onChange={e =>setName(e.target.value)}
+                                    value={email}
+					                onChange={e =>setEmail(e.target.value)}
                                     />
                                     
                             </div>
@@ -47,13 +56,12 @@ const Login=()=>{
 					                onChange={e =>setPassword(e.target.value)}
                                     />
                             </div>
-                            <Link to="/private">
-						        <button className="btn btn-success mb-5 ">LOGIN</button>
-					        </Link>
+						        <button className="btn btn-success mb-5 " type="submit">LOGIN</button>
+                            
                         <div>
                             <p className="info-signup">Don`t have an account ?</p>
                             <Link to="/signup">
-                                    <button className="redirect" type="submit">SIGNUP NOW</button>
+                                <button className="redirect btn" type="submit" >SIGNUP NOW</button>
                             </Link>
                         </div>
                     </div>

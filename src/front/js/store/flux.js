@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			isLoggedIn:[],
+			isLoggedIn:false,
 			
 		},
 		actions: {
@@ -25,8 +25,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 		/* --------- De aqui en adelante van las funciones de flux  */
 
+		setLogin:()=>{
+			setStore({isLoggedIn:true})
+		},
+		setLogout:()=>{
+			setStore({isLoggedIn:false})
+			localStorage.removeItem('token');
+			
+		},
+
 		register_User: (name,email, password) =>{
-			console.log("probar")
+			
 			fetch( 'https://redesigned-guacamole-pqx4jp945p4c6wr-3001.app.github.dev/api/signup',{
 				method:'POST',
 				headers:{
@@ -46,9 +55,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 			.catch(error => console.log('Error parcero', error))
 
 		},
-		
+
+		/* --------- FUNCION FLUX (fetch) PARA LOGIN----------- */
+		login: async(email, password) => {
+			await fetch('https://redesigned-guacamole-pqx4jp945p4c6wr-3001.app.github.dev/api/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ email, password })
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error(Error);
+				}
+				return response.json();
+			})
+			.then(data => {
+				console.log('Login exitoso:', data);
+				
+				localStorage.setItem('token', data.token);
+				
+				getActions().setLogin();
+				return data;
+
+			})
+			.catch(error => {
+				console.error('Error durante el login:', error);
+				throw error;
+			});
 		}
-	};
+	}
 };
+};
+	
 
 export default getState;
