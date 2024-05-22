@@ -35,8 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		register_User: (name,email, password) =>{
-			
-			fetch( 'https://redesigned-guacamole-pqx4jp945p4c6wr-3001.app.github.dev/api/signup',{
+			fetch(`${process.env.BACKEND_URL}/api/signup`,{
 				method:'POST',
 				headers:{
 					'Content-Type' : 'application/json'
@@ -58,7 +57,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		/* --------- FUNCION FLUX (fetch) PARA LOGIN----------- */
 		login: async(email, password) => {
-			await fetch('https://redesigned-guacamole-pqx4jp945p4c6wr-3001.app.github.dev/api/login', {
+			await fetch(`${process.env.BACKEND_URL}/api/login`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

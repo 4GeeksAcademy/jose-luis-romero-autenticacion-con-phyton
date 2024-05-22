@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -14,15 +14,16 @@ export const Home = () => {
 					style={{ width: "100vw", height: "100vh", objectFit: "cover" }}
 				/>
 			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
+			<div className="buttons">
+				<Link to={"/signup"}>
+					<button className="btn btn-success">Sign Up</button>
+				</Link>
+				<div className="separator">/</div>
+				<Link to={"/login"}>
+					<button className="btn btn-success">LogIn</button>
+				</Link>
 			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://start.4geeksacademy.com/starters/react-flask">
-					Read documentation
-				</a>
-			</p>
+			
 		</div>
 	);
 };
